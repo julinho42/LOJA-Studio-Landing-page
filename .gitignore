@@ -1,0 +1,23 @@
+# OS files
+.DS_Store
+
+# Internal working files
+memory/
+Social Media/
+loja-photo-download-1of1/
+*.numbers
+*.xlsx
+*.pdf
+
+# Agent, strategy & content docs
+0*_*.md
+1*_*.md
+2*_*.md
+3*_*.md
+LOJA_*.md
+
+# Claude config
+.claude/
+
+# Root-level photos (not used by site)
+Loja_ByronBay_*.jpg

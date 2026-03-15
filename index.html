@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOJA Studio — Coming Soon</title>
+  <meta name="description" content="Sculptural furniture handmade in Byron Bay. Join the list for 214 hours of exclusive early access to the Tones of Basalt collection.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --charcoal: #2a2a28;
+      --warm-white: #faf9f6;
+      --chalk: #f5f3ee;
+      --sand: #c4b9a8;
+      --stone: #a8a08e;
+      --font-serif: 'Cormorant Garamond', 'Georgia', serif;
+      --font-sans: 'Inter', 'Helvetica Neue', sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--warm-white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── Nav ─── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 2rem 3rem;
+      mix-blend-mode: difference;
+    }
+
+    .nav__logo {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: baseline;
+      gap: 0.3em;
+    }
+
+    .nav__logo-main { font-size: 3.2rem; }
+    .nav__logo-sub  { font-size: 0.7rem; letter-spacing: 0.25em; }
+
+    /* ─── Hero ─── */
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 600px;
+      overflow: hidden;
+    }
+
+    .hero__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+
+    .hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.15) 0%,
+        rgba(0,0,0,0.05) 40%,
+        rgba(0,0,0,0.45) 100%
+      );
+    }
+
+    .hero__content {
+      position: absolute;
+      bottom: 3.5rem;
+      left: 3rem;
+      right: 3rem;
+      color: #fff;
+    }
+
+    .hero__eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero__heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: 0.02em;
+    }
+
+    .hero__heading em {
+      font-style: italic;
+    }
+
+    /* ─── Section base ─── */
+    .section {
+      padding: 6rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section--full {
+      max-width: none;
+      padding: 6rem 3rem;
+    }
+
+    /* ─── Brand statement ─── */
+    .statement {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      padding: 7rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .statement__label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 1.5rem;
+    }
+
+    .statement__heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+    }
+
+    .statement__body {
+      font-size: 0.9rem;
+      line-height: 1.85;
+      color: rgba(42,42,40,0.65);
+      max-width: 38ch;
+    }
+
+    /* ─── Access block ─── */
+    .access {
+      background: var(--charcoal);
+      color: var(--chalk);
+      padding: 6rem 3rem;
+      text-align: center;
+    }
+
+    .access__inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .access__label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 2rem;
+    }
+
+    .access__heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .access__heading strong {
+      font-weight: 400;
+      font-style: italic;
+      color: var(--sand);
+    }
+
+    .access__body {
+      font-size: 0.85rem;
+      line-height: 1.9;
+      color: rgba(245,243,238,0.55);
+      margin-bottom: 3rem;
+      max-width: 50ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ─── Signup form ─── */
+    .signup {
+      display: flex;
+      gap: 0;
+      max-width: 480px;
+      margin: 0 auto;
+      border-bottom: 1px solid rgba(245,243,238,0.25);
+    }
+
+    .signup__input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      color: var(--chalk);
+      padding: 0.75rem 0;
+    }
+
+    .signup__input::placeholder {
+      color: rgba(245,243,238,0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 0.7rem;
+    }
+
+    .signup__btn {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--chalk);
+      padding: 0.75rem 0 0.75rem 1.5rem;
+      transition: opacity 0.3s;
+      white-space: nowrap;
+    }
+
+    .signup__btn:hover { opacity: 0.6; }
+
+    .signup__note {
+      margin-top: 1.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: rgba(245,243,238,0.3);
+      text-transform: uppercase;
+    }
+
+    .signup__success {
+      display: none;
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--sand);
+      margin-top: 1rem;
+    }
+
+    /* ─── Collection teaser ─── */
+    .teaser {
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .teaser__item {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+    }
+
+    .teaser__item img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+
+    .teaser__item img.is-active {
+      opacity: 1;
+    }
+
+    .teaser__label {
+      position: absolute;
+      bottom: 2rem;
+      left: 2rem;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      z-index: 1;
+      text-transform: uppercase;
+    }
+
+    /* ─── Divider ─── */
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--sand);
+      margin: 0 auto;
+    }
+
+    /* ─── Enquiry section ─── */
+    .enquiry {
+      padding: 7rem 3rem;
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .enquiry__label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 1.5rem;
+    }
+
+    .enquiry__heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+
+    .enquiry__body {
+      font-size: 0.85rem;
+      line-height: 1.85;
+      color: rgba(42,42,40,0.55);
+      margin-bottom: 2.5rem;
+      max-width: 42ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      border: 1px solid var(--charcoal);
+      transition: background 0.3s, color 0.3s;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--charcoal);
+      color: var(--chalk);
+    }
+
+    /* ─── Enquiry form ─── */
+    .enquiry-form {
+      display: none;
+      max-width: 480px;
+      margin: 2rem auto 0;
+      text-align: left;
+    }
+
+    .enquiry-form.is-open {
+      display: block;
+    }
+
+    .form__field {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .form__input,
+    .form__select {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(42,42,40,0.2);
+      outline: none;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      color: var(--charcoal);
+      padding: 0.75rem 0;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .form__label {
+      position: absolute;
+      top: 0.75rem;
+      left: 0;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(42,42,40,0.4);
+      pointer-events: none;
+      transition: all 0.3s var(--ease);
+    }
+
+    .form__input:focus ~ .form__label,
+    .form__input:not(:placeholder-shown) ~ .form__label {
+      top: -0.75rem;
+      font-size: 0.55rem;
+    }
+
+    .form__select-wrap {
+      position: relative;
+    }
+
+    .form__select-arrow {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      font-size: 0.7rem;
+      color: var(--stone);
+    }
+
+    .form__submit {
+      width: 100%;
+      background: var(--charcoal);
+      color: var(--chalk);
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 1.1rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: opacity 0.3s;
+    }
+
+    .form__submit:hover { opacity: 0.8; }
+
+    .form__success-msg {
+      display: none;
+      text-align: center;
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--stone);
+      margin-top: 1.5rem;
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      background: var(--charcoal);
+      padding: 3.5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      border-top: 1px solid rgba(245,243,238,0.06);
+    }
+
+    .footer__logo {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,243,238,0.5);
+    }
+
+    .footer__acknowledgement {
+      text-align: center;
+      max-width: 560px;
+      color: rgba(245,243,238,0.35);
+      font-size: 0.72rem;
+      line-height: 1.75;
+      letter-spacing: 0.02em;
+    }
+
+    .footer__social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .footer__social a {
+      color: rgba(245,243,238,0.35);
+      transition: color 0.3s;
+    }
+
+    .footer__social a:hover {
+      color: rgba(245,243,238,0.8);
+    }
+
+    .footer__copy {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: rgba(245,243,238,0.2);
+      text-transform: uppercase;
+    }
+
+    /* ─── Fade-in ─── */
+    .fade {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+    }
+
+    .fade.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .nav { padding: 1.5rem; }
+      .nav__logo-main { font-size: 2rem; }
+
+      .hero__content { left: 1.5rem; right: 1.5rem; bottom: 2.5rem; }
+
+      .statement {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 5rem 1.5rem;
+      }
+
+      .access { padding: 5rem 1.5rem; }
+
+      .teaser {
+        grid-template-columns: 1fr;
+      }
+
+      .teaser__item { aspect-ratio: 4/3; }
+
+      .enquiry { padding: 5rem 1.5rem; }
+
+      .footer { padding: 3rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a class="nav__logo" href="#">
+      <span class="nav__logo-main">LOJA</span>
+      <span class="nav__logo-sub">Studio</span>
+    </a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <img class="hero__img" src="images/hero.jpg" alt="LOJA Studio — Tones of Basalt collection">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">Byron Bay, Australia</p>
+      <h1 class="hero__heading">Sculptural furniture<br>for <em>everyday</em> ritual.</h1>
+    </div>
+  </section>
+
+  <!-- Brand statement -->
+  <div class="statement fade">
+    <div>
+      <p class="statement__label">About LOJA</p>
+      <h2 class="statement__heading">Inspired by stone.<br>Shaped by hand.</h2>
+    </div>
+    <div>
+      <p class="statement__body">LOJA Studio creates sculptural furniture and objects inspired by Nature. Handmade and finished with natural lime, each piece is designed to anchor a space, inviting gathering, ceremony and a slower way of living.</p>
+    </div>
+  </div>
+
+  <!-- Early access block -->
+  <section class="access">
+    <div class="access__inner fade">
+      <p class="access__label">Tones of Basalt — First Collection</p>
+      <h2 class="access__heading">The collection is ready.<br><strong>The website launches soon.</strong></h2>
+      <p class="access__body">Each piece is handmade, so runs are limited. Join the list for a private invitation to explore the full collection and pre-order your piece.</p>
+
+      <form class="signup" id="signup-form">
+        <input class="signup__input" type="email" name="email" placeholder="Your email address" required>
+        <button class="signup__btn" type="submit">Join the list →</button>
+      </form>
+      <p class="signup__note">No spam. Just your early access window and occasional notes on what moves us.</p>
+      <p class="signup__success" id="signup-success">You're on the list. We'll be in touch.</p>
+    </div>
+  </section>
+
+  <!-- Collection teaser -->
+  <div class="teaser">
+    <div class="teaser__item" data-slideshow="left">
+      <img src="images/mesa-coffee-table.jpg" alt="LOJA Studio" class="is-active">
+      <img src="images/pedra-side-table-2.jpg" alt="LOJA Studio">
+      <span class="teaser__label">Tones of Basalt</span>
+    </div>
+    <div class="teaser__item" data-slideshow="right">
+      <img src="images/altar-ceremonial-table.jpg" alt="LOJA Studio" class="is-active">
+      <img src="images/sella-chair.jpg" alt="LOJA Studio">
+      <span class="teaser__label">Tones of Basalt</span>
+    </div>
+  </div>
+
+  <!-- Enquiry -->
+  <section class="enquiry fade" id="contact">
+    <p class="enquiry__label">Get in touch</p>
+    <h2 class="enquiry__heading">Already drawn<br>to a piece?</h2>
+    <p class="enquiry__body">Every LOJA piece starts with a conversation. If something has caught your attention, reach out and we'll guide you from there.</p>
+
+    <button class="btn" id="enquiry-toggle">Enquire now →</button>
+
+    <div class="enquiry-form" id="enquiry-form">
+      <form id="contact-form">
+        <div class="form__field">
+          <input class="form__input" type="text" name="name" placeholder=" " required>
+          <label class="form__label">Your name</label>
+        </div>
+        <div class="form__field">
+          <input class="form__input" type="email" name="email" placeholder=" " required>
+          <label class="form__label">Email address</label>
+        </div>
+        <div class="form__field form__select-wrap">
+          <select class="form__select" name="piece" required>
+            <option value="" disabled selected>Which piece interests you?</option>
+            <option value="altar">Altar — Offering Table</option>
+            <option value="altar-small">Altar (Small) — Offering Table</option>
+            <option value="amago">Âmago — Gathering Table</option>
+            <option value="arrimo">Arrimo — Side Table</option>
+            <option value="calma">Calma — Meditation Chair</option>
+            <option value="custom">Custom Enquiry</option>
+          </select>
+          <span class="form__select-arrow">↓</span>
+        </div>
+        <button class="form__submit" type="submit">Send enquiry →</button>
+        <p class="form__success-msg" id="contact-success">Thank you. We'll be in touch within 48 hours.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span class="footer__logo"><span style="font-size:1.2rem">LOJA</span> <span style="font-size:0.7rem; letter-spacing:0.2em">Studio</span></span>
+
+    <p class="footer__acknowledgement">We acknowledge the Bundjalung people as the Traditional Owners of the land on which we work and live. We pay our respects to their Elders past, present, and emerging, and recognize their ongoing connection to land, sea, and community.</p>
+
+    <div class="footer__social">
+      <a href="https://www.instagram.com/_loja____/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+        </svg>
+      </a>
+      <a href="https://www.pinterest.com/loja_studio/" target="_blank" rel="noopener" aria-label="Pinterest">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C6.48 2 2 6.48 2 12c0 4.08 2.46 7.58 5.97 9.12-.08-.74-.16-1.88.03-2.69.17-.73 1.12-4.74 1.12-4.74s-.29-.57-.29-1.41c0-1.32.77-2.31 1.72-2.31.81 0 1.21.61 1.21 1.34 0 .82-.52 2.04-.79 3.17-.22.95.47 1.72 1.41 1.72 1.69 0 2.99-1.78 2.99-4.36 0-2.28-1.64-3.87-3.97-3.87-2.71 0-4.3 2.03-4.3 4.13 0 .82.31 1.69.71 2.17.08.09.09.18.07.27-.07.3-.24.95-.27 1.08-.04.17-.14.21-.33.13-1.24-.58-2.01-2.39-2.01-3.85 0-3.13 2.28-6.01 6.57-6.01 3.45 0 6.13 2.46 6.13 5.74 0 3.43-2.16 6.18-5.16 6.18-1.01 0-1.95-.52-2.28-1.14l-.62 2.36c-.22.87-.83 1.96-1.24 2.62.93.29 1.92.44 2.95.44 5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="currentColor"/>
+        </svg>
+      </a>
+    </div>
+
+    <span class="footer__copy">© 2026 LOJA Studio. All rights reserved.</span>
+  </footer>
+
+  <script>
+    // Fade-in on scroll
+    const fades = document.querySelectorAll('.fade');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    fades.forEach(el => observer.observe(el));
+
+    // Email signup
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.style.display = 'none';
+      document.querySelector('.signup__note').style.display = 'none';
+      document.getElementById('signup-success').style.display = 'block';
+    });
+
+    // Enquiry toggle
+    document.getElementById('enquiry-toggle').addEventListener('click', function() {
+      const form = document.getElementById('enquiry-form');
+      form.classList.toggle('is-open');
+      this.textContent = form.classList.contains('is-open') ? 'Close ×' : 'Enquire now →';
+    });
+
+    // Enquiry form submit
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.querySelectorAll('input, select, button[type=submit]').forEach(el => el.style.display = 'none');
+      document.getElementById('contact-success').style.display = 'block';
+    });
+
+    // Teaser slideshow — offset right column by half interval
+    function cycleSlideshow(el, interval) {
+      const imgs = el.querySelectorAll('img');
+      let current = 0;
+      setInterval(() => {
+        imgs[current].classList.remove('is-active');
+        current = (current + 1) % imgs.length;
+        imgs[current].classList.add('is-active');
+      }, interval);
+    }
+    cycleSlideshow(document.querySelector('[data-slideshow="left"]'), 3500);
+    setTimeout(() => {
+      cycleSlideshow(document.querySelector('[data-slideshow="right"]'), 3500);
+    }, 1750);
+  </script>
+
+</body>
+</html>
